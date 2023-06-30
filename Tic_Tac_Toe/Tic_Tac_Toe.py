@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import font
 from itertools import cycle
+import random
 #import numpy as np
 
 # define size of game board and other dimensions
@@ -44,3 +45,9 @@ for row in range(3):
         # add cells to main window
         button.grid(row=row, column=col, padx=5, pady=5, sticky="nsew")
 
+# player == 'X' if random.randint(0,1) == 1 else 'O'
+
+# clicked_btn = event.widget
+# row,col = cells[clicked_btn]
+
+# TODO: event handle
