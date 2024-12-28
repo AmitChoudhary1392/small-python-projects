@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}WeatherApp{% endblock title %}</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+</head>
+<body class="container">
+    <section>
+        <h1>WeatherApp</h1>
+        <p>Your personal Weather App built with Django and WeatherApi</p>
+    </section>
+    <div>
+        {% block page_content %}
+
+        {% endblock page_content %}
+    </div>
+</body>
+</html>
