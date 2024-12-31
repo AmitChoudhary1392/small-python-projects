@@ -1,0 +1,86 @@
+
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="column">
+    <div class="box">
+        <span class="is-small has-text-grey-light">
+            <form action="{% url 'CurrentWeather' %}" method="post">
+                {% csrf_token %}
+                
+                {{ form.as_table }}
+                
+                <button class="button is-success is-fullwidth is-medium mt-5"
+                        type="submit">Search
+                </button>
+              
+                 <!-- Toggle Radio buttons-->
+                <div class="mb-4 pb-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                      value="option1" {% if checkboxoption == "option1" or checkboxoption == None %} checked="checked"{% endif %} />
+                    <label class="form-check-label" for="inlineRadio1">Celsius</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                      value="option2" {% if checkboxoption == "option2" %} checked="checked"{% endif %} />
+                    <label class="form-check-label" for="inlineRadio2">Farenheit</label>
+                  </div>
+                </div>
+            </form>
+        </span>
+       
+  
+    </div>
+</div>
+
+{% if response %}
+<!-- <section class="vh-100" style="background-color: #4B515D;"> -->
+    <div class="container py-5 h-100" >
+      <!-- Weather Card-->
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-8 col-lg-6 col-xl-4" >
+  
+          <div class="card" style="color: #4B515D; border-radius: 35px;">
+            <div class="card-body p-4" >
+  
+              <div class="d-flex">
+                <h6 class="flex-grow-1">{{response.location.name}}</h6>
+                <h6>{{localtime}}</h6>
+              </div>
+  
+              <div class="d-flex flex-column text-center mt-5 mb-4">
+                {% if checkboxoption == "option1" or checkboxoption == None %}
+                <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> {{response.current.temp_c}}&deg;C </h6>
+                <span class="small" style="color: #868B94">{{response.current.condition.text}} | Feels Like: {{response.current.feelslike_c}}&deg;C</span>
+                {% elif checkboxoption == "option2" %}
+                <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> {{response.current.temp_f}}&deg;F </h6>
+                <span class="small" style="color: #868B94">{{response.current.condition.text}} | Feels Like: {{response.current.feelslike_f}}&deg;F</span>
+                {% endif %}
+              </div>
+  
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1" style="font-size: 1rem;">
+                  <div><i class="fas fa-wind fa-fw" style="color:#868B94;"></i> <span class="ms-1"> {{response.current.wind_kph}} km/h </span></div>
+                  <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> {{response.current.humidity}}% </span></div>
+                  <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> {{response.current.wind_dir}} </span></div>
+                </div>
+                <div>
+                  <img src={{response.current.condition.icon}} width="100px">
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  <!-- </section> -->
+{% endif %}
+
+
+
+{% endblock page_content %}

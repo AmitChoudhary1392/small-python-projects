@@ -1,13 +1,16 @@
 from django import forms
 
 class LocationForm(forms.Form):
-    body = forms.CharField(
+    location = forms.CharField(
         required=True,
-        widget=forms.widgets.Textarea(
+        widget=forms.widgets.TextInput(
             attrs={
-                "placeholder": "City, Country etc.",
-                "class": "textarea is-success is-medium",
+                "placeholder": "City",
+                # "class": "textarea is-success is-medium",
             }
         ),
-        label="",
+        label="Location",
+
     )
+    
+
