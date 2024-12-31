@@ -3,5 +3,5 @@ from pages import views
 
 urlpatterns = [
     path("", views.home, name='home'),
-    path("", views.CurrentWeather,name='CurrentWeather'),
+    path("currentweather/", views.GetCurrentWeather,name='CurrentWeather'),
 ]
